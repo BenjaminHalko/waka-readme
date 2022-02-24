@@ -53,7 +53,7 @@ inputs:
     # on their readme
     required: false
    
-   GH_TOKEN:
+   HIDE:
     description: "Ignore Language (comma seperated)"
     required: false
     default: ""
