@@ -52,6 +52,11 @@ inputs:
     # default is set to false since users can choose whether to show the total time
     # on their readme
     required: false
+   
+   GH_TOKEN:
+    description: "Ignore Language (comma seperated)"
+    required: false
+    default: ""
 
 runs:
   using: "docker"
