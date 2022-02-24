@@ -52,6 +52,11 @@ inputs:
     # default is set to false since users can choose whether to show the total time
     # on their readme
     required: false
+   
+   HIDE_LANGUAGE:
+    description: "Ignore Language (comma seperated)"
+    default: ""
+    required: false
 
 runs:
   using: "docker"
