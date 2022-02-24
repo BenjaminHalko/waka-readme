@@ -26,7 +26,7 @@ commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 blocks = os.getenv("INPUT_BLOCKS")
 show_time = os.getenv("INPUT_SHOW_TIME")
 time_range = os.getenv("INPUT_TIME_RANGE")
-language_hide = os.getenv("HIDE_LANGUAGE").split(",")
+language_hide = os.getenv("HIDE_LANGUAGE")
 
 
 def title(start: str, end: str) -> str:
@@ -92,11 +92,11 @@ def get_stats(range: str = 'last_7_days') -> str:
 
     percentDived = 100
     for lang in lang_data[:5]:
-        if (lang['name'] not in language_hide):
+        if (lang['name'] not in language_hide.split(",")):
             percentDived -= float(format(lang['percent'], '0.2f').zfill(5))
 
     for lang in lang_data[:5]:
-        if (lang['name'] not in language_hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
+        if (lang['name'] not in language_hide.split(",")) or (lang['hours'] == 0 and lang['minutes'] == 0):
             continue
 
         lth = len(lang['name'])
