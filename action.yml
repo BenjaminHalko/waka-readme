@@ -53,7 +53,7 @@ inputs:
     # on their readme
     required: false
    
-   HIDE_LANGUAGE:
+  HIDE_LANGUAGE:
     description: "Ignore Language (comma seperated)"
     default: ""
     required: false
