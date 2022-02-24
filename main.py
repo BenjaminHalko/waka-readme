@@ -93,11 +93,11 @@ def get_stats(range: str = 'last_7_days') -> str:
     percentDived = 1.0
     hide = language_hide.split(",")
     for lang in lang_data[:5]:
-        if (lang['name'] in hide) or (lang['hours'] == 0 and lang['minutes'] == 0 and lang['seconds'] == 0):
+        if (lang['name'] in hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
             percentDived -= lang['percent']/100.0
 
     for lang in lang_data[:5]:
-        if (lang['name'] in hide) or (lang['hours'] == 0 and lang['minutes'] == 0 and lang['seconds'] == 0):
+        if (lang['name'] in hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
             continue
 
         lth = len(lang['name'])
