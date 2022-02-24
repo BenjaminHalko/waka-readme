@@ -93,11 +93,11 @@ def get_stats(range: str = 'last_7_days') -> str:
     percentDived = 100.0
     hide = language_hide.split(",")
     for lang in lang_data[:5]:
-        if (lang['name'] not in hide):
+        if (lang['name'] in hide):
             percentDived -= float(format(lang['percent'], '0.2f').zfill(5))
 
     for lang in lang_data[:5]:
-        if (lang['name'] not in hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
+        if (lang['name'] in hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
             continue
 
         lth = len(lang['name'])
@@ -109,7 +109,7 @@ def get_stats(range: str = 'last_7_days') -> str:
         # following line provides a neat finish
         fmt_percent = format(lang['percent'], '0.2f').zfill(5)
         data_list.append(
-            f"{lang['name']}{' '*(pad + 3 - lth)}{text}{make_graph(lang['percent'], blocks, ln_graph)}   {float(fmt_percent)/percentDived} % ")
+            f"{lang['name']}{' '*(pad + 3 - lth)}{text}{make_graph(lang['percent']*percentDived, blocks, ln_graph)}   {float(fmt_percent)*percentDived} % ")
     print("Graph Generated")
     data = '\n'.join(data_list)
 
