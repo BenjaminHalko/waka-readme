@@ -26,7 +26,7 @@ commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 blocks = os.getenv("INPUT_BLOCKS")
 show_time = os.getenv("INPUT_SHOW_TIME")
 time_range = os.getenv("INPUT_TIME_RANGE")
-language_hide = os.getenv("HIDE_LANGUAGE")
+language_hide = os.getenv("INPUT_HIDE_LANGUAGE")
 
 
 def title(start: str, end: str) -> str:
