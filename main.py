@@ -26,7 +26,7 @@ commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 blocks = os.getenv("INPUT_BLOCKS")
 show_time = os.getenv("INPUT_SHOW_TIME")
 time_range = os.getenv("INPUT_TIME_RANGE")
-language_hide = os.getenv("HIDE").split(",")
+language_hide = os.getenv("HIDE_LANGUAGE").split(",")
 
 
 def title(start: str, end: str) -> str:
@@ -90,21 +90,25 @@ def get_stats(range: str = 'last_7_days') -> str:
         print("The Data seems to be empty. Please wait for a day for the data to be filled in.")
         return '```text\nNo Activity tracked this Week\n```'
 
+    percentDived = 100
     for lang in lang_data[:5]:
-        if(lang['name'] not in language_hide):
-            if lang['hours'] == 0 and lang['minutes'] == 0:
-                continue
+        if (lang['name'] not in language_hide):
+            percentDived -= float(format(lang['percent'], '0.2f').zfill(5))
 
-            lth = len(lang['name'])
-            text = ""
-            if show_time == 'true':
-                ln_text = len(lang['text'])
-                text = f"{lang['text']}{' '*(TEXT_LENGTH - ln_text)}"
+    for lang in lang_data[:5]:
+        if (lang['name'] not in language_hide) or (lang['hours'] == 0 and lang['minutes'] == 0):
+            continue
 
-            # following line provides a neat finish
-            fmt_percent = format(lang['percent'], '0.2f').zfill(5)
-            data_list.append(
-                f"{lang['name']}{' '*(pad + 3 - lth)}{text}{make_graph(lang['percent'], blocks, ln_graph)}   {fmt_percent} % ")
+        lth = len(lang['name'])
+        text = ""
+        if show_time == 'true':
+            ln_text = len(lang['text'])
+            text = f"{lang['text']}{' '*(TEXT_LENGTH - ln_text)}"
+
+        # following line provides a neat finish
+        fmt_percent = format(lang['percent'], '0.2f').zfill(5)
+        data_list.append(
+            f"{lang['name']}{' '*(pad + 3 - lth)}{text}{make_graph(lang['percent'], blocks, ln_graph)}   {fmt_percent/percentDived} % ")
     print("Graph Generated")
     data = '\n'.join(data_list)
 
