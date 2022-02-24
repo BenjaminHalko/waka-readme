@@ -53,10 +53,10 @@ inputs:
     # on their readme
     required: false
    
-   HIDE:
+   HIDE_LANGUAGE:
     description: "Ignore Language (comma seperated)"
-    required: false
     default: ""
+    required: false
 
 runs:
   using: "docker"
